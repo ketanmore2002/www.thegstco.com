@@ -1,0 +1,1079 @@
+{% load socialaccount %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TheGSTco</title>
+    {% comment %} <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet"> {% endcomment %}
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.8.95/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        {% comment %} @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,400italic|Montserrat:400,700); {% endcomment %}
+
+        {% comment %} html,
+        span,
+        applet,
+        object,
+        iframe,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p,
+        blockquote,
+        pre,
+        a,
+        abbr,
+        acronym,
+        address,
+        big,
+        cite,
+        code,
+        del,
+        dfn,
+        em,
+        img,
+        ins,
+        kbd,
+        q,
+        s,
+        samp,
+        small,
+        strike,
+        strong,
+        sub,
+        sup,
+        tt,
+        var,
+        b,
+        u,
+        i,
+        center,
+        dl,
+        dt,
+        dd,
+        ol,
+        ul,
+        li,
+        fieldset,
+        form,
+        label,
+        legend,
+        table,
+        caption,
+        tbody,
+        tfoot,
+        thead,
+        tr,
+        th,
+        td,
+        article,
+        aside,
+        canvas,
+        details,
+        embed,
+        figure,
+        figcaption,
+        footer,
+        header,
+        hgroup,
+       
+        output,
+        ruby,
+        section,
+        summary,
+        time,
+        mark,
+        audio,
+        video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: inherit;
+            font-size: 100%;
+            vertical-align: baseline;
+        } {% endcomment %}
+
+        html {
+            line-height: 1;
+        }
+
+        ol,
+        ul {
+            list-style: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        caption,
+        th,
+        td {
+            text-align: left;
+            font-weight: normal;
+            vertical-align: middle;
+        }
+
+        q,
+        blockquote {
+            quotes: none;
+        }
+
+        q:before,
+        q:after,
+        blockquote:before,
+        blockquote:after {
+            content: "";
+            content: none;
+        }
+
+        a img {
+            border: none;
+        }
+
+        article,
+        aside,
+        details,
+        figcaption,
+        figure,
+        footer,
+        header,
+        hgroup,
+        main,
+        section,
+        summary {
+            display: block;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            color: #333;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .cf:before,
+        .cf:after {
+            content: " ";
+            display: table;
+        }
+
+        .cf:after {
+            clear: both;
+        }
+
+        .cf {
+            *zoom: 1;
+        }
+
+        .wrap {
+            width: 75%;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 5% 0;
+            margin-bottom: 5em;
+        }
+
+        .projTitle {
+            font-family: "Montserrat", sans-serif;
+            font-weight: bold;
+            text-align: center;
+            font-size: 2em;
+            padding: 1em 0;
+            border-bottom: 1px solid #dadada;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .projTitle span {
+            font-family: "Droid Serif", serif;
+            font-weight: normal;
+            font-style: italic;
+            text-transform: lowercase;
+            color: #777;
+        }
+
+        .heading {
+            padding: 1em 0;
+            border-bottom: 1px solid #d0d0d0;
+        }
+
+        .heading h1 {
+            font-family: "Droid Serif", serif;
+            font-size: 2em;
+            float: left;
+        }
+
+        .heading a.continue:link,
+        .heading a.continue:visited {
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            letter-spacing: -0.015em;
+            font-size: 0.75em;
+            padding: 1em;
+            color: #fff;
+            background: #82ca9c;
+            font-weight: bold;
+            border-radius: 50px;
+            float: right;
+            text-align: right;
+            -webkit-transition: all 0.25s linear;
+            -moz-transition: all 0.25s linear;
+            -ms-transition: all 0.25s linear;
+            -o-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+        }
+
+        .heading a.continue:after {
+            content: "\276f";
+            padding: 0.5em;
+            position: relative;
+            right: 0;
+            -webkit-transition: all 0.15s linear;
+            -moz-transition: all 0.15s linear;
+            -ms-transition: all 0.15s linear;
+            -o-transition: all 0.15s linear;
+            transition: all 0.15s linear;
+        }
+
+        .heading a.continue:hover,
+        .heading a.continue:focus,
+        .heading a.continue:active {
+            background: #f69679;
+        }
+
+        .heading a.continue:hover:after,
+        .heading a.continue:focus:after,
+        .heading a.continue:active:after {
+            right: -10px;
+        }
+
+        .tableHead {
+            display: table;
+            width: 100%;
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.75em;
+        }
+
+        .tableHead li {
+            display: table-cell;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        .tableHead li.prodHeader {
+            text-align: left;
+        }
+
+        .cart {
+            padding: 1em 0;
+        }
+
+        .cart .items {
+            display: block;
+            width: 100%;
+            vertical-align: middle;
+            padding: 1.5em;
+            border-bottom: 1px solid #fafafa;
+        }
+
+        .cart .items.even {
+            background: #fafafa;
+        }
+
+        .cart .items .infoWrap {
+            display: table;
+            width: 100%;
+        }
+
+        .cart .items .cartSection {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .cart .items .cartSection .itemNumber {
+            font-size: 0.75em;
+            color: #777;
+            margin-bottom: 0.5em;
+        }
+
+        .cart .items .cartSection h3 {
+            font-size: 1em;
+            font-family: "Montserrat", sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+
+        .cart .items .cartSection p {
+            display: inline-block;
+            font-size: 0.85em;
+            color: #777777;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .cart .items .cartSection p .quantity {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .cart .items .cartSection p.stockStatus {
+            color: #000000;
+            font-weight: bold;
+            padding: 0.5em 0 0 1em;
+            text-transform: uppercase;
+        }
+
+        .cart .items .cartSection p.stockStatus.out {
+            color: #f69679;
+        }
+
+        .cart .items .cartSection .itemImg {
+            width: 4em;
+            float: left;
+        }
+
+        .cart .items .cartSection.qtyWrap,
+        .cart .items .cartSection.prodTotal {
+            text-align: center;
+        }
+
+        .cart .items .cartSection.qtyWrap p,
+        .cart .items .cartSection.prodTotal p {
+            font-weight: bold;
+            font-size: 1.25em;
+        }
+
+        .cart .items .cartSection input.qty {
+            width: 2em;
+            text-align: center;
+            font-size: 1em;
+            padding: 0.25em;
+            margin: 1em 0.5em 0 0;
+        }
+
+        .cart .items .cartSection .itemImg {
+            width: 8em;
+            display: inline;
+            padding-right: 1em;
+        }
+
+        .special {
+            display: block;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .special .specialContent {
+            padding: 1em 1em 0;
+            display: block;
+            margin-top: 0.5em;
+            border-top: 1px solid #dadada;
+        }
+
+        .special .specialContent:before {
+            content: "\21b3";
+            font-size: 1.5em;
+            margin-right: 1em;
+            color: #6f6f6f;
+            font-family: helvetica, arial, sans-serif;
+        }
+
+        a.remove {
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            color: #ffffff;
+            font-weight: bold;
+            background: #e0e0e0;
+            padding: 0.5em;
+            font-size: 0.75em;
+            display: inline-block;
+            border-radius: 100%;
+            line-height: 0.85;
+            -webkit-transition: all 0.25s linear;
+            -moz-transition: all 0.25s linear;
+            -ms-transition: all 0.25s linear;
+            -o-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+        }
+
+        a.remove:hover {
+            background: #f30;
+        }
+
+        .promoCode {
+            border: 2px solid #efefef;
+            float: left;
+            width: 35%;
+            padding: 2%;
+        }
+
+        .promoCode label {
+            display: block;
+            width: 100%;
+            font-style: italic;
+            font-size: 1.15em;
+            margin-bottom: 0.5em;
+            letter-spacing: -0.025em;
+        }
+
+        .promoCode input {
+            width: 85%;
+            font-size: 1em;
+            padding: 0.5em;
+            float: left;
+            border: 1px solid #dadada;
+        }
+
+        .promoCode input:active,
+        .promoCode input:focus {
+            outline: 0;
+        }
+
+        .promoCode a.btn {
+            float: left;
+            width: 15%;
+            padding: 0.75em 0;
+            border-radius: 0 1em 1em 0;
+            text-align: center;
+            border: 1px solid #82ca9c;
+        }
+
+        .promoCode a.btn:hover {
+            border: 1px solid #f69679;
+            background: #f69679;
+        }
+
+        {% comment %} .btn:link,
+        .btn:visited {
+            text-decoration: none;
+            font-family: "Montserrat", sans-serif;
+            letter-spacing: -0.015em;
+            font-size: 1em;
+            padding: 1em 3em;
+            color: #fff;
+            background: #82ca9c;
+            font-weight: bold;
+            border-radius: 50px;
+            float: right;
+            text-align: right;
+            -webkit-transition: all 0.25s linear;
+            -moz-transition: all 0.25s linear;
+            -ms-transition: all 0.25s linear;
+            -o-transition: all 0.25s linear;
+            transition: all 0.25s linear;
+        }
+
+        .btn:after {
+            content: "\276f";
+            padding: 0.5em;
+            position: relative;
+            right: 0;
+            -webkit-transition: all 0.15s linear;
+            -moz-transition: all 0.15s linear;
+            -ms-transition: all 0.15s linear;
+            -o-transition: all 0.15s linear;
+            transition: all 0.15s linear;
+        } {% endcomment %}
+
+        {% comment %} .btn:hover,
+        .btn:focus,
+        .btn:active {
+            background: #f69679;
+        }
+
+        .btn:hover:after,
+        .btn:focus:after,
+        .btn:active:after {
+            right: -10px;
+        } {% endcomment %}
+
+        .promoCode .btn {
+            font-size: 0.85em;
+            padding: 0.5em 2em;
+        }
+
+        /* TOTAL AND CHECKOUT  */
+        .subtotal {
+            float: right;
+            width: 35%;
+        }
+
+        .subtotal .totalRow {
+            padding: 0.5em;
+            text-align: right;
+        }
+
+        .subtotal .totalRow.final {
+            font-size: 1.25em;
+            font-weight: bold;
+        }
+
+        .subtotal .totalRow span {
+            display: inline-block;
+            padding: 0 0 0 1em;
+            text-align: right;
+        }
+
+        .subtotal .totalRow .label {
+            font-family: "Montserrat", sans-serif;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            color: #777;
+        }
+
+        .subtotal .totalRow .value {
+            letter-spacing: -0.025em;
+            width: 35%;
+        }
+
+        @media only screen and (max-width: 39.375em) {
+            .wrap {
+                width: 98%;
+                padding: 2% 0;
+            }
+
+            .projTitle {
+                font-size: 1.5em;
+                padding: 10% 5%;
+            }
+
+            .heading {
+                padding: 1em;
+                font-size: 90%;
+            }
+
+            .cart .items .cartSection {
+                width: 90%;
+                display: block;
+                float: left;
+            }
+
+            .cart .items .cartSection.qtyWrap {
+                width: 10%;
+                text-align: center;
+                padding: 0.5em 0;
+                float: right;
+            }
+
+            .cart .items .cartSection.qtyWrap:before {
+                content: "QTY";
+                display: block;
+                font-family: "Montserrat", sans-serif;
+                padding: 0.25em;
+                font-size: 0.75em;
+            }
+
+            .cart .items .cartSection.prodTotal,
+            .cart .items .cartSection.removeWrap {
+                display: none;
+            }
+
+            .cart .items .cartSection .itemImg {
+                width: 25%;
+            }
+
+            .promoCode,
+            .subtotal {
+                width: 100%;
+            }
+
+            a.btn.continue {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* {% comment %} ================================================================== {% endcomment %} */
+
+
+
+        .modal-body {
+    background-color: #fff;
+    border-color: #fff
+}
+
+.close {
+    color: #000;
+    cursor: pointer
+}
+
+.close:hover {
+    color: #000
+}
+
+.theme-color {
+    color: #004cb9
+}
+
+hr.new1 {
+    border-top: 2px dashed #fff;
+    margin: 0.4rem 0
+}
+
+{% comment %} .btn-primary {
+    color: #fff;
+    background-color: #004cb9;
+    border-color: #004cb9;
+    padding: 12px;
+    padding-right: 30px;
+    padding-left: 30px;
+    border-radius: 1px;
+    font-size: 17px
+} {% endcomment %}
+
+/* ================================================================================ */
+
+*{ font-family: Montserrat;}
+
+    .hm-gradient {
+        background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+    }
+    .darken-grey-text {
+        color: #2E2E2E;
+    }
+  }
+
+  
+
+
+  .card {
+    margin: auto;
+    width: 38%;
+    max-width: 600px;
+    padding: 4vh 0;
+    box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-top: 3px solid rgb(252, 103, 49);
+    border-bottom: 3px solid rgb(252, 103, 49);
+    border-left: none;
+    border-right: none
+}
+
+@media(max-width:768px) {
+    .card {
+        width: 90%
+    }
+}
+
+.title {
+    color: rgb(252, 103, 49);
+    font-weight: 600;
+    margin-bottom: 2vh;
+    padding: 0 8%;
+    font-size: initial
+}
+
+#details {
+    font-weight: 400
+}
+
+.info {
+    padding: 5% 8%
+}
+
+.info .col-5 {
+    padding: 0
+}
+
+#heading {
+    color: grey;
+    line-height: 6vh
+}
+
+.pricing {
+    background-color: #ddd3;
+    padding: 2vh 8%;
+    font-weight: 400;
+    line-height: 2.5
+}
+
+.pricing .col-3 {
+    padding: 0
+}
+
+.total {
+    padding: 2vh 8%;
+    color: rgb(252, 103, 49);
+    font-weight: bold
+}
+
+.total .col-3 {
+    padding: 0
+}
+
+.footer {
+    padding: 0 8%;
+    font-size: x-small;
+    color: black
+}
+
+.footer img {
+    height: 5vh;
+    opacity: 0.2
+}
+
+.footer a {
+    color: rgb(252, 103, 49)
+}
+
+.footer .col-10,
+.col-2 {
+    display: flex;
+    padding: 3vh 0 0;
+    align-items: center
+}
+
+.footer .row {
+    margin: 0
+}
+
+#progressbar {
+    margin-bottom: 3vh;
+    overflow: hidden;
+    color: #007BFF;
+    padding-left: 0px;
+    margin-top: 3vh
+}
+
+#progressbar li {
+    list-style-type: none;
+    font-size: x-small;
+    width: 25%;
+    float: left;
+    position: relative;
+    font-weight: 400;
+    color: rgb(160, 159, 159)
+}
+
+#progressbar #step1:before {
+    content: "";
+    color: #007BFF;
+    width: 5px;
+    height: 5px;
+    margin-left: 0px !important
+}
+
+#progressbar #step2:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-left: 32%
+}
+
+#progressbar #step3:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 32%
+}
+
+#progressbar #step4:before {
+    content: "";
+    color: #fff;
+    width: 5px;
+    height: 5px;
+    margin-right: 0px !important
+}
+
+#progressbar li:before {
+    line-height: 29px;
+    display: block;
+    font-size: 12px;
+    background: #ddd;
+    border-radius: 50%;
+    margin: auto;
+    z-index: -1;
+    margin-bottom: 1vh
+}
+
+#progressbar li:after {
+    content: '';
+    height: 2px;
+    background: #ddd;
+    position: absolute;
+    left: 0%;
+    right: 0%;
+    margin-bottom: 2vh;
+    top: 1px;
+    z-index: 1
+}
+
+.progress-track {
+    padding: 0 8%
+}
+
+#progressbar li:nth-child(2):after {
+    margin-right: auto
+}
+
+#progressbar li:nth-child(1):after {
+    margin: auto
+}
+
+#progressbar li:nth-child(3):after {
+    float: left;
+    width: 68%
+}
+
+#progressbar li:nth-child(4):after {
+    margin-left: auto;
+    width: 132%
+}
+
+#progressbar li.active {
+    color: black
+}
+
+#progressbar li.active:before,
+#progressbar li.active:after {
+    background: #007BFF
+}
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light p-4" style="background-color: rgb(245, 242, 252)">
+        <div class="container">
+            <a class="navbar-brand" href="/" style="color: white;">
+                <img src="{% static 'langing_page/assets/img/icons/logo3.png'%}" alt="" height="35" class="d-inline-block align-text-top">
+                
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0  ml-auto">
+                  <li class="nav-item text-center">
+                    <a class="nav-link active" aria-current="page" href="/about" style="color: grey;font-size: 17px;"><b>About Us</b></a>
+                </li>
+                <li class="nav-item text-center">
+                  <a class="nav-link active" aria-current="page" href="/Contact" style="color: grey;font-size: 17px;"><b>Contact</b></a>
+              </li>
+              <li class="nav-item text-center">
+                <a class="nav-link active" aria-current="page" href="/faq" style="color: grey;font-size: 17px;"><b>FAQ</b></a>
+              </li>
+                  <li class="nav-item text-center">
+                      <a class="nav-link active" aria-current="page" href="/blogs" style="color: grey;font-size: 17px;"><b>Blog</b></a>
+                  </li>
+            </li>
+              <li class="nav-item text-center">
+                <a class="nav-link active" aria-current="page" href="/pricing" style="color: grey;font-size: 17px;"><b>Pricing</b></a>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item mx-2 text-center">
+                        <a class="nav-link active" aria-current="page" href="/profile" style="color: grey;font-size: 17px;"><b>Account</b></a>
+                    </li>
+                    <li class="nav-item mx-2 text-center">
+                        <a class="nav-link active" aria-current="page" href="/order" style="color: grey;font-size: 17px;"><b>Orders</b></a>
+                    </li>
+                    <li class="nav-item mx-2 text-center ">
+                      {% comment %} <a href="/logout_view"><button id="remove_button_login" type="submit" class="btn1" style="background-color:#1678F8;">Sign Out</button></a> {% endcomment %}
+                      {% comment %} <button type="button" class="btn btn-primary waves-effect">Sign Out</button> {% endcomment %}
+                      <a href="/logout_view"><button type="button" class="btn btn-primary waves-effect">Sign Out</button></a>
+
+                    </li>
+                    {% else %}
+                    <li class="nav-item mx-2 text-center ">
+                      <form method="post" action="{% provider_login_url 'google' %}?next=/profile">{% csrf_token %}<button id="remove_button_login" type="submit" class="btn btn-primary waves-effect" style="background-color:#1678F8;">Sign Up</button></form> 
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+      </nav>
+
+    <div class="wrap cf">
+        <div class="heading cf">
+            <h1>Your Orders</h1>
+        </div>
+        <div class="cart">
+            <ul class="cartWrap">
+                {% for order in orders_placed %}
+                <li class="items odd">
+                    <div class="infoWrap">
+                        <div class="cartSection">
+                            <img src="http://lorempixel.com/output/technics-q-c-300-300-4.jpg" alt="" class="itemImg" />
+
+                            <p class="itemNumber my-4"> Order Id : #{{order.id}}</p>
+
+                            <h3>GST Number</h3>
+
+                            <p class="my-4">Order Status : {{order.order_status}}</p>
+
+                            <p class="stockStatus out"></p>
+                            <button type="button" class="btn btn-primary my-2 mx-2" data-bs-toggle="modal" data-bs-target="#Modal{{order.id}}">See Details</button>
+
+                             {% if not order.pan_card or not order.photograph or not order.proof_of_address or not order.aadhar_card %}
+                              <a href="/upload_docments/{{order.id}}"> <button type="button" class="btn btn-warning my-2 mx-4">Upload Documents</button></a>
+                              {% endif %} 
+                        </div>
+
+                        <div class="prodTotal cartSection">
+                            <p>₹{{order.total_amount}}</p>
+                        </div>
+                    </div>
+                </li>
+                <hr>
+                <div class="modal fade" id="Modal{{order.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <!-- <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div> -->
+                        <!-- <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Save changes</button>
+                        </div> -->
+                        <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                                <div class="modal-body ">
+                                    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+                                    <div class="px-4 py-5">
+                                        <h5 class="text-uppercase">{{order.full_name}}</h5>
+                                        <h5 class="text-lowercase my-2"> Order id : {{order.id}}</h5>
+                                        <h4 class="mt-5 theme-color mb-5">state(s) : {{order.state}}</h4> <h4 class="mt-5 theme-color mb-5">Order Status : {{order.order_status}}</h4> 
+                                        <span class="theme-color">Payment Summary</span>
+                                        <div class="mb-3">
+                                            <hr class="new1">
+                                        </div>
+                                        <div class="d-flex justify-content-between my-4"> <span class="font-weight-bold">Total State(s)</span> <span class="text-muted">1</span> </div>
+
+                                        <div class="d-flex justify-content-between my-4"> <small>Price Per State</small> <small>₹{% for p in pri %}{{p.state_price}}{% endfor %}</small> </div>
+
+                                        <div class="d-flex justify-content-between my-4"> <small>GST Tax</small> <small>{{order.total_amount}}%</small></div>
+
+                                        <div class="d-flex justify-content-between mt-3"> <span class="font-weight-bold">Total</span> <span class="font-weight-bold theme-color">₹{% for p in pri %}{{p.price_with_percentage}}{% endfor %}</span> </div>
+
+                                        <a href="/generateinvoice/{{order.id}}"><div class="text-center mt-5"> <button class="btn btn-primary">Download Invoice</button> </div></a>
+                                    
+                                        <div class="progress-track">
+                                            <ul id="progressbar">
+                                                {% if order.order_status == 'Order Recieved' %}
+                                                <li class="step0 active" id="step1"style="font-size: 12px;">Order Reciveded</li>
+                                                <li class="step0  text-center" id="step2"style="font-size: 12px;">Processing</li>
+                                                <li class="step0  text-right" id="step3"style="font-size: 12px;">Submitted </li>
+                                                <li class="step0  text-right" id="step4"style="font-size: 12px;">Completed</li>
+                                                {% elif order.order_status == 'Processing' %}
+                                                <li class="step0 active" id="step1"style="font-size: 12px;">Order Reciveded</li>
+                                                <li class="step0 active text-center" id="step2"style="font-size: 12px;">Processing</li>
+                                                <li class="step0  text-right" id="step3"style="font-size: 12px;">Submitted </li>
+                                                <li class="step0  text-right" id="step4"style="font-size: 12px;">Completed</li>
+                                                {% elif order.order_status == 'Submitted For Approval' %}
+                                                <li class="step0 active" id="step1"style="font-size: 12px;">Order Reciveded</li>
+                                                <li class="step0 active text-center" id="step2"style="font-size: 12px;">Processing</li>
+                                                <li class="step0 active text-right" id="step3"style="font-size: 12px;">Submitted </li>
+                                                <li class="step0  text-right" id="step4"style="font-size: 12px;">Completed</li>
+                                                {% elif order.order_status == 'Order Completed' %}
+                                                <li class="step0 active" id="step1"style="font-size: 12px;">Order Reciveded</li>
+                                                <li class="step0 active text-center" id="step2"style="font-size: 12px;">Processing</li>
+                                                <li class="step0 active text-right" id="step3"style="font-size: 12px;">Submitted </li>
+                                                <li class="step0 actizve text-right" id="step4"style="font-size: 12px;">Completed</li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+    <section class="py-0 Montserrat" style="background-color:black">
+        <div class="container Montserrat">
+          <div class="row py-4">
+            <div class="col-12 col-sm-12 col-lg-6 mb-4 order-0 order-sm-0">
+              <img src=" {% static 'langing_page/assets/img/icons/logo.png' %}" height="40"
+                width="130px"> 
+              <p class="text-light mt-4 mb-0 Montserrat">Call: +91 9860114104</p>
+              <p class="text-light mt-1 Montserrat">Email: info@thegstco.com</p>
+              <div class="d-flex"><a href="#!"><img class="me-xl-3 me-1" src="{% static 'langing_page/assets/img/gallery/linkedin-line1.svg'%}" alt="in" width ="20px"  height="20px" /></a><a href="#!">
+                <img class="me-xl-3 me-1 mx-2"src="{% static 'langing_page/assets/img/gallery/facebook-line1.svg'%}" alt="fb" width="20px"  height="20px" /></a><a href="#!">
+                  <img class="me-xl-3 me-1 mx-2" src="{% static 'langing_page/assets/img/gallery/twitter-line1.svg'%}" alt="twitter" width="20px" height="20px"/></a><a href="#!">
+                    <img class="me-xl-3 me-1 mx-2" src="{% static 'langing_page/assets/img/gallery/instagram-line1.svg'%}" alt="instragram" width="20px" height="20px"/></a></div>
+            </div>
+            <div class="col-3 col-sm-4 col-lg-2 mb-3 order-2 order-sm-1 Montserrat">
+              <h5 class="lh-lg fw-bold text-light Montserrat my-2">Account</h5>
+              <ul class="list-unstyled text-light mb-md-4"  style="color:grey">
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-2" href="/profile">Profile</a></li>
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-2" href="/order">Your Orders</a></li>
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-2 mb-3 order-3 order-sm-2">
+              <h5 class="lh-lg fw-bold text-light Montserrat  my-2">Support</h5>
+              <ul class="list-unstyled text-light mb-md-4 mb-lg-0">
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-2"
+                    href="mailto:info@thegstco.com">Mail Us</a></li>
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-2" href="tel:+91986011404">Call
+                  </a></li>
+              </ul>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-2 mb-3 order-3 order-sm-2">
+              <h5 class="lh-lg fw-bold text-light Montserrat">Links</h5>
+              <ul class="list-unstyled text-light mb-md-4 mb-lg-0">
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-3" href="#pricing">Pricing</a></li>
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-3" href="/form_view">Get Your GST</a>
+                </li>
+                <li class="lh-lg"><a class="text-500 footer-link text-light Montserrat  my-3" href="/blog">Blog</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <!-- ============================================-->
+        <!-- <section> begin ============================-->
+        <section class="py-0" style="background-color:black">
+          <div class="container">
+            <div class="row justify-content-md-between justify-content-evenly py-3">
+              <div class="col-12 col-sm-8 col-md-6 col-lg-auto text-center text-md-start">
+                <p class="fs--1 my-2 fw-bold text-200 Montserrat"style="color:white">&copy; 2022 TheGSTco.</p>
+              </div>
+              <!-- <div class="col-12 col-sm-8 col-md-6">
+              <p class="fs--1 my-2 text-center text-md-end text-200"> &nbsp;<svg class="bi bi-suit-heart-fill" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="#F95C19" viewBox="0 0 16 16">
+                  <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z"></path>
+                </svg>&nbsp;by&nbsp;<a class="fw-bold text-info text-200" href="https://themewagon.com/" target="_blank"> </a></p>
+            </div> -->
+            </div>
+          </div><!-- end of .container-->
+        </section><!-- <section> close ============================-->
+        <!-- ============================================-->
+    
+      </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+
+
+</body>
+</html>

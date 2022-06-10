@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Snippet - BBBootstrap</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <style>
+    body {
+      color: #000;
+      overflow-x: hidden;
+      height: 100%;
+      background-color: #D3D3D3;
+      background-repeat: no-repeat;
+    }
+
+    .card {
+      z-index: 0;
+      background-color: #eceff1;
+      padding-bottom: 20px;
+      margin-top: 90px;
+      margin-bottom: 90px;
+      border-radius: 10px;
+    }
+
+    .top {
+      padding-top: 40px;
+      padding-left: 13% !important;
+      padding-right: 13% !important;
+    }
+
+    #progressbar {
+      margin-bottom: 30px;
+      overflow: hidden;
+      color: #455a64;
+      padding-left: 0px;
+      margin-top: 30px;
+    }
+
+    #progressbar li {
+      list-style-type: none;
+      font-size: 13px;
+      width: 25%;
+      float: left;
+      position: relative;
+      font-weight: 400;
+    }
+
+    #progressbar .step0:before {
+      font-family: FontAwesome;
+      content: "\f10c";
+      color: #fff;
+    }
+
+    #progressbar li:before {
+      width: 40px;
+      height: 40px;
+      line-height: 45px;
+      display: block;
+      font-size: 20px;
+      background: #c5cae9;
+      border-radius: 50%;
+      margin: auto;
+      padding: 0px;
+    }
+
+    #progressbar li:after {
+      content: "";
+      width: 100%;
+      height: 12px;
+      background: #c5cae9;
+      position: absolute;
+      left: 0;
+      top: 16px;
+      z-index: -1;
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+      position: absolute;
+      left: -50%;
+    }
+
+    #progressbar li:nth-child(2):after,
+    #progressbar li:nth-child(3):after {
+      left: -50%;
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+      position: absolute;
+      left: 50%;
+    }
+
+    #progressbar li:last-child:after {
+      border-top-right-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    #progressbar li:first-child:after {
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+    }
+
+    #progressbar li.active:before,
+    #progressbar li.active:after {
+      background: #000000;
+    }
+
+    #progressbar li.active:before {
+      font-family: FontAwesome;
+      content: "\f00c";
+    }
+
+    .icon {
+      width: 60px;
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    .icon-content {
+      padding-bottom: 20px;
+    }
+
+    @media screen and (max-width: 992px) {
+      .icon-content {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+
+<body oncontextmenu="return false" class="snippet-body">
+
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(245, 242, 252);border-style: groove;">
+    <div class="container">
+        <a class="navbar-brand" href="/" style="color: white;">
+            <img src="{% static 'langing_page/assets/img/icons/logo2.png'%}" alt="" height="35" class="d-inline-block align-text-top">
+            
+        </a>
+        
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0  ml-auto">
+              <li class="nav-item text-center">
+                <a class="nav-link active" aria-current="page" href="/" style="color: grey;font-size: 20px;">Home</a>
+            </li>
+                <li class="nav-item text-center">
+                    <a class="nav-link active" aria-current="page" href="#" style="color: grey;font-size: 20px;">Pricing</a>
+                </li>
+                <li class="nav-item text-center">
+                    <a class="nav-link active" aria-current="page" href="/form_view" style="color: grey;font-size: 20px;">Get Your GST</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li class="nav-item mx-2 text-center">
+                    <a class="nav-link active" aria-current="page" href="/profile" style="color: grey;font-size: 20px;">Profile</a>
+                </li>
+                <li class="nav-item mx-2 text-center">
+                    <a class="nav-link active" aria-current="page" href="/order" style="color: grey;font-size: 20px;">Your Orders</a>
+                </li>
+                <li class="nav-item mx-2 text-center ">
+                  <a href="/logout_view"><button id="remove_button_login" type="submit" class="btn1 noHover" style="background-color:black;">Sign Out</button></a>
+                </li>
+                {% else %}
+                <li class="nav-item mx-2 text-center ">
+                  <form method="post" action="{% provider_login_url 'google' %}?next=/profile">{% csrf_token %}<button id="remove_button_login" type="submit" class="btn1" style="background-color:black;">Sign Up</button></form> 
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+  </nav>
+  
+    {% for order in orders_placed %}
+  <div class="container px-1 px-md-4 py-5 mx-auto">
+    <div class="card">
+      <div class="row d-flex justify-content-between px-3 top">
+        <div class="d-flex">
+          <h5>
+            ORDER ID : <span class="text-primary font-weight-bold">#{{order.id}}</span>
+          </h5>
+        </div>
+        <div class="d-flex flex-column text-sm-right">
+          {% comment %} <p class="mb-0">Payment id : <span><b>{{order.razorpay_payment_id}}</b></span></p> {% endcomment %}
+          <a href="/invoice/{{order.id}}"<button type="button" class="btn btn-warning my-2">SEE INVOICE</button></a>
+          <a href="/generateinvoice/{{order.id}}"<button type="button" class="btn btn-warning my-2">DOWNLOAD INVOICE</button></a>
+
+        </div>
+      </div>
+      <!-- Add class 'active' to progress -->
+      <div class="row d-flex justify-content-center">
+        <div class="col-12">
+          <ul id="progressbar" class="text-center">
+            <li id="1" class="active step0"></li>
+            <li id="2" class="active step0"></li>
+            <li id="3" class="step0"></li>
+            <li id="4" class="step0"></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row justify-content-between top">
+        <div class="row d-flex icon-content">
+          <img class="icon" src="https://i.imgur.com/9nnc9Et.png" />
+          <div class="d-flex flex-column">
+            <p class="font-weight-bold">Order<br />Placed</p>
+          </div>
+        </div>
+        <div class="row d-flex icon-content">
+          <img class="icon" src="https://i.imgur.com/u1AzR7w.png" />
+          <div class="d-flex flex-column">
+            <p class="font-weight-bold">Order<br />Unfulfilled</p>
+          </div>
+        </div>
+        <div class="row d-flex icon-content">
+          <img class="icon" src="https://i.imgur.com/TkPm63y.png" />
+          <div class="d-flex flex-column">
+            <p class="font-weight-bold">Order<br />Processing</p>
+          </div>
+        </div>
+        <div class="row d-flex icon-content">
+          <img class="icon" src="https://i.imgur.com/HdsziHP.png" />
+          <div class="d-flex flex-column">
+            <p class="font-weight-bold">Order<br />Fulfilled</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% block js %}
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script>
+    $(document).ready(function () {
+
+      var process ="{{order.order_status}}"
+    
+
+    if (process == "Unfulfilled") {
+      $("#2").attr('class', 'active step0');
+    }
+    else if (process == "Processing") {
+
+      $("#2").attr('class', 'active step0');
+      $("#3").attr('class', 'active step0');
+    }
+    else {
+
+      $("#2").attr('class', 'active step0');
+      $("#3").attr('class', 'active step0');
+      $("#4").attr('class', 'active step0');
+
+    }
+  });
+  </script>
+  {% endblock js %}
+  {% endfor %}
+
+  <script type="text/javascript"
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src=""></script>
+  <script type="text/javascript" src=""></script>
+  <script type="text/Javascript"></script>
+</body>
+
+</html>

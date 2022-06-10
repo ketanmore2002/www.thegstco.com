@@ -1,0 +1,252 @@
+{% load socialaccount %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mazer Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.css'%}">
+
+    <link rel="stylesheet" href="{%static 'assets/vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{%static 'assets/images/favicon.svg" type="image/x-icon' %}">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item  ">
+                            <a href="/admin_panel" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/all_states" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>State</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item">
+                            <a href="/create_blogs" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Blogs</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item active">
+                            <a href="/admin_panel_upaid" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Upaid Orders</span>
+                            </a>
+                        </li>
+
+
+                        <li class="sidebar-item  ">
+                            <a href="/csv" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Export Data</span>
+                            </a>
+                        </li>
+
+                        
+
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        <div id="main">
+            <header class="mb-3">
+                <a href="#" class="burger-btn d-block d-xl-none">
+                    <i class="bi bi-justify fs-3"></i>
+                </a>
+            </header>
+
+            <div class="page-heading">
+                <h3>Orders Statistics</h3>
+            </div>
+            <div class="page-content">
+                <section class="row">
+                    <div class="col-12 col-lg-9">
+                        <div class="row">
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon purple">
+                                                    <i class="iconly-boldShow"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Order Recieved</h6>
+                                                <h6 class="font-extrabold mb-0">{{Recieved}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon blue">
+                                                    <i class="iconly-boldProfile"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Processing </h6>
+                                                <h6 class="font-extrabold mb-0">{{Processing}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon green">
+                                                    <i class="iconly-boldAdd-User"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Submitted For Approval</h6>
+                                                <h6 class="font-extrabold mb-0">{{Submitted}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 col-lg-3 col-md-6">
+                                <div class="card">
+                                    <div class="card-body px-3 py-4-5">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="stats-icon red">
+                                                    <i class="iconly-boldBookmark"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted font-semibold">Order Completed</h6>
+                                                <h6 class="font-extrabold mb-0">{{Completed}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <section class="section">
+                            <div class="card">
+                                <div class="card-header">
+                                    Simple Datatable
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-striped" id="table1">
+                                        <thead>
+                                            <tr>
+                                                <th>Order id</th>
+                                                <th>Name</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Amount</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in orders %}
+                                            <tr>
+                                                <td>{{order.id}}</td>
+                                                <td>{{order.full_name}}</td>
+                                                <td>{{order.date}}</td>
+                                                <td>{{order.order_status}}</td>
+                                                <td>{{order.total_amount}}</td>
+                                                <td>
+                                                    <a href="/order_information/{{order.id}}"> <span class="badge bg-success">Details</span></a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+        
+                        </section>
+                    </div>
+                    <div class="col-12 col-lg-3">
+                        <div class="card">
+                            <div class="card-body py-4 px-5">
+                                <div class="d-flex align-items-center">
+                                    <div class="avatar avatar-xl">
+                                    </div>
+                                    <div class="ms-3 name text-center">
+                                        <h5 class="font-bold">{{user.first_name}},Welcome Back</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header text-center">
+                                <h4>Total Orders</h4>
+                            </div>
+                            <div class="card-footer text-center">
+                                <h4>{{total}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <footer>
+                
+            </footer>
+        </div>
+    </div>
+    <script src="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
+    <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{%static 'assets/vendors/apexcharts/apexcharts.js'%}"></script>
+    <script src="{%static 'assets/js/pages/dashboard.js'%}"></script>
+
+    <script src="{%static 'assets/js/main.js'%}"></script>
+
+
+    <script src="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
+    <script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+    <script src="{%static 'assets/vendors/simple-datatables/simple-datatables.js'%}"></script>
+    <script>
+        // Simple Datatable
+        let table1 = document.querySelector('#table1');
+        let dataTable = new simpleDatatables.DataTable(table1);
+    </script>
+
+    <script src="{%static 'assets/js/main.js'%}"></script>
+</body>
+
+</html>

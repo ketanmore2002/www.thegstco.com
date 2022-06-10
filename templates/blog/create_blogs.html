@@ -1,0 +1,205 @@
+{% load socialaccount %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Mazer Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{%static 'assets/css/bootstrap.css'%}">
+
+    <link rel="stylesheet" href="{%static 'assets/vendors/iconly/bold.css' %}">
+
+    <link rel="stylesheet" href="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/vendors/bootstrap-icons/bootstrap-icons.css' %}">
+    <link rel="stylesheet" href="{%static 'assets/css/app.css' %}">
+    <link rel="shortcut icon" href="{%static 'assets/images/favicon.svg" type="image/x-icon' %}">
+</head>
+
+<body>
+    <div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+</div>
+<div id="sidebar" class="active">
+    <div class="sidebar-wrapper active">
+        <div class="sidebar-header">
+            <div class="d-flex justify-content-between">
+                <div class="toggler">
+                    <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="menu">
+                <li class="sidebar-title">Menu</li>
+
+                <li class="sidebar-item ">
+                    <a href="/admin_panel" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a href="/all_states" class='sidebar-link'>
+                        <i class="bi bi-grid-fill"></i>
+                        <span>State</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item active">
+                  <a href="/create_blogs" class='sidebar-link'>
+                      <i class="bi bi-grid-fill"></i>
+                      <span>Blogs</span>
+                  </a>
+              </li>
+
+              <li class="sidebar-item">
+                <a href="/admin_panel_upaid" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Upaid Orders</span>
+                </a>
+            </li>
+
+                <li class="sidebar-item  ">
+                    <a href="/csv" class='sidebar-link'>
+                        <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                        <span>Export Data</span>
+                    </a>
+                </li>
+
+                
+
+            </ul>
+        </div>
+        <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+    </div>
+</div>
+
+    <div id="main">
+
+        <section id="basic-vertical-layouts">
+            <div class="row match-height">
+                <div class="col-md-6 col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Blogs</h4>
+                        </div>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <form method="POST"  class="form form-vertical" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group  my-3">
+                                                    <label for="first-name-vertical">Blogs heading</label>
+                                                    <input type="text" id="state_price" 
+                                                        class="form-control" name="heading1"
+                                                        placeholder="">
+                                                </div>
+                                            </div>
+                                                  <div class="card-body">
+                                                      <div class="form-group mb-3">
+                                                          <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                                                          <textarea class="form-control" id="exampleFormControlTextarea1" name="description"
+                                                              rows="3"></textarea>
+                                                      </div>
+                                                  </div>
+                                                                                       
+                                            
+                                              <div class="col-lg-6 col-md-12">
+                                                  <div class="mb-3">
+                                                      <label for="formFile" class="form-label">Upload Image</label>
+                                                      <input class="form-control" type="file" id="formFile" name="image">
+                                                  </div>
+                                              </div>
+                                            <div class="col-12 d-flex justify-content-end mt-3">
+                                                
+                                                <button type="submit" name="State_price_form" value="Reply"
+                                                    class="btn btn-primary me-1 mb-1 mx-2">Submit</button>
+                                                <button type="reset"
+                                                    class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="card">
+                <div class="card-header">
+                     Datatable
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped" id="table1">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for b in blogs %}
+                            <tr>
+                                <td>{{b.heading1}}</td>
+                                <td>
+                                    <a href="/delete_blogs/{{b.id}}"> <span class="badge bg-success">Delete</span></a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+</div>
+
+<script src="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
+<script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+<script src="{%static 'assets/vendors/apexcharts/apexcharts.js'%}"></script>
+<script src="{%static 'assets/js/pages/dashboard.js'%}"></script>
+
+<script src="{%static 'assets/js/main.js'%}"></script>
+
+
+<script src="{%static 'assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js'%}"></script>
+<script src="{%static 'assets/js/bootstrap.bundle.min.js'%}"></script>
+
+<script src="{%static 'assets/vendors/simple-datatables/simple-datatables.js'%}"></script>
+<script>
+    // Simple Datatable
+    let table1 = document.querySelector('#table1');
+    let dataTable = new simpleDatatables.DataTable(table1);
+</script>
+
+<script src="{%static 'assets/js/main.js'%}"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#State_btn").click(function(){
+            var t = $("#state_price").val()
+            {% comment %} $("#state_change").attr("href", t) {% endcomment %}
+            window.location.href = "/change_price/");
+        })
+    })
+</script>
+
+</body>
+</html>
