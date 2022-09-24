@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-i2#3pa#jch$04@a7knfy7773+%w^zn!$(afr_7r3op7vr-x(^4'
+SECRET_KEY = 'django-insecure'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,30 +107,17 @@ WSGI_APPLICATION = 'gst_project.wsgi.application'
 import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd8bk5ojoesbfso',
-        'USER': 'ludasjgiejltid',
-        'PASSWORD': '944aa98ec08b9966eed0ce8c140a3cd756b2abf1002581694a3cf8a303fba23bk',
-        'HOST': 'ec2-52-207-74-100.compute-1.amazonaws.com',
-        'PORT': '5432',
-    }
-}
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
+
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'myproject',
-#         'USER': 'myprojectuser',
-#         'PASSWORD': 'gst@12345',
-#         'HOST': 'localhost',
-#         'PORT': '',
-#     }
-# }
 
 
 WHITENOISE_USE_FINDERS = True
